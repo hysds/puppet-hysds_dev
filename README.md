@@ -13,5 +13,5 @@ bash < <(curl -skL https://github.com/hysds/puppet-hysds_dev/raw/master/install.
 
 ## Build Docker image
 ```
-./build_docker.sh
+./build_docker.sh <tag>
 ```
