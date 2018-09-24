@@ -16,6 +16,7 @@ class hysds_dev inherits hysds_base {
     'openldap-devel': ensure => installed;
     'geos-devel': ensure => installed;
     'proj-devel': ensure => installed;
+    'Cython': ensure => installed;
   }
 
 
