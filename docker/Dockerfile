@@ -6,6 +6,9 @@ LABEL description "Base HySDS image for development"
 # git url to hysds dev puppet module
 ENV GIT_URL https://github.com/hysds/puppet-hysds_dev/raw/master/install.sh
 
+# add latest repo version to invalidate cache
+ADD https://api.github.com/repos/hysds/puppet-hysds_dev/git/refs/heads/master version.json
+
 # provision via puppet
 RUN set -ex \
  && sudo yum update -y \
