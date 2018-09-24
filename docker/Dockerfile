@@ -1,7 +1,7 @@
 FROM hysds/base:latest
 
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
-LABEL description "Base Centos7 image for HySDS"
+LABEL description "Base HySDS image for development"
 
 # git url to hysds dev puppet module
 ENV GIT_URL https://github.com/hysds/puppet-hysds_dev/raw/master/install.sh
