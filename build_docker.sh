@@ -7,4 +7,6 @@ if [ "$#" -ne 1 ]; then
 fi
 TAG=$1
 
+# build dev images
 docker build --rm --force-rm -t hysds/dev:${TAG} -f docker/Dockerfile .
+docker build --rm --force-rm -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda .
