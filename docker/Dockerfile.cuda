@@ -3,11 +3,15 @@ FROM hysds/cuda-base:latest
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
 LABEL description "CUDA Base HySDS image for development"
 
+# get org and branch
+ARG ORG
+ARG BRANCH
+
 # git url to hysds dev puppet module
-ENV GIT_URL https://github.com/hysds/puppet-hysds_dev/raw/master/install.sh
+ENV GIT_URL https://github.com/${ORG}/puppet-hysds_dev/raw/${BRANCH}/install.sh
 
 # add latest repo version to invalidate cache
-ADD https://api.github.com/repos/hysds/puppet-hysds_dev/git/refs/heads/master version.json
+ADD https://api.github.com/repos/${ORG}/puppet-hysds_dev/git/refs/heads/${BRANCH} version.json
 
 # provision via puppet
 RUN set -ex \
@@ -17,14 +21,14 @@ RUN set -ex \
       cuda-nvml-dev-$CUDA_PKG_VERSION \
       cuda-minimal-build-$CUDA_PKG_VERSION \
       cuda-command-line-tools-$CUDA_PKG_VERSION \
-      devtoolset-6-make \
-      devtoolset-6-binutils \
-      devtoolset-6-gcc \
-      devtoolset-6-gcc-gfortran \
-      devtoolset-6-gcc-c++ \
+      devtoolset-7-make \
+      devtoolset-7-binutils \
+      devtoolset-7-gcc \
+      devtoolset-7-gcc-gfortran \
+      devtoolset-7-gcc-c++ \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
- && sudo /tmp/install.sh \
+ && sudo /tmp/install.sh ${ORG} ${BRANCH} \
  && sudo rm -rf /etc/puppet/modules/* /mnt/swapfile \
  && sudo yum clean all \
  && sudo rm -f /tmp/install.sh \
