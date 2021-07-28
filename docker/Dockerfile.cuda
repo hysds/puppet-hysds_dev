@@ -1,4 +1,4 @@
-FROM hysds/cuda-base:latest
+FROM hysds/cuda-base:python3.9
 
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
 LABEL description "CUDA Base HySDS image for development"
