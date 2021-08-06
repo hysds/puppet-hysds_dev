@@ -15,6 +15,8 @@ ADD https://api.github.com/repos/${ORG}/puppet-hysds_dev/git/refs/heads/${BRANCH
 
 # provision via puppet
 RUN set -ex \
+ && sudo sh -c 'echo "exclude=.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf' \
+ && sudo yum clean all -y \
  && sudo yum update -y \
  && sudo curl -skL ${GIT_URL} > /tmp/install.sh \
  && sudo chmod 755 /tmp/install.sh \
