@@ -10,12 +10,14 @@ ARG BRANCH
 # git url to hysds dev puppet module
 ENV GIT_URL https://github.com/${ORG}/puppet-hysds_dev/raw/${BRANCH}/install.sh
 
+# CUDA version
+ENV CUDA_PKG_VERSION 9-2=9.2.148-1
+
 # add latest repo version to invalidate cache
 ADD https://api.github.com/repos/${ORG}/puppet-hysds_dev/git/refs/heads/${BRANCH} version.json
 
 # provision via puppet
 RUN set -ex \
- && sudo sed -i '$aexclude=.edu' /etc/yum/pluginconf.d/fastestmirror.conf \
  && sudo yum update -y \
  && sudo yum install -y \
       cuda-libraries-dev-$CUDA_PKG_VERSION \
