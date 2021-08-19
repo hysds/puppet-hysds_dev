@@ -15,12 +15,11 @@ ADD https://api.github.com/repos/${ORG}/puppet-hysds_dev/git/refs/heads/${BRANCH
 
 # provision via puppet
 RUN set -ex \
+ && sudo yum install centos-release-scl -y \
+ && sudo yum-config-manager --enable rhel-server-rhscl-7-rpms \
  && sudo yum update -y \
  && sudo yum install -y \
-      cuda-libraries-dev-$CUDA_PKG_VERSION \
-      cuda-nvml-dev-$CUDA_PKG_VERSION \
-      cuda-minimal-build-$CUDA_PKG_VERSION \
-      cuda-command-line-tools-$CUDA_PKG_VERSION \
+      cuda \
       devtoolset-7-make \
       devtoolset-7-binutils \
       devtoolset-7-gcc \
