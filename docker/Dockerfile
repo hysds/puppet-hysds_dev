@@ -1,4 +1,5 @@
-FROM hysds/base:latest
+ARG TAG=latest
+FROM hysds/base:${TAG}
 
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
 LABEL description "Base HySDS image for development"

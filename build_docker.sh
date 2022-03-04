@@ -10,7 +10,7 @@ ORG=$2
 BRANCH=$3
 
 # build dev images
-docker build --rm --force-rm --build-arg ORG=${ORG} --build-arg BRANCH=${BRANCH} \
-  -t hysds/dev:${TAG} -f docker/Dockerfile .
-docker build --rm --force-rm --build-arg ORG=${ORG} --build-arg BRANCH=${BRANCH} \
-  -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda .
+docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
+  --build-arg BRANCH=${BRANCH} -t hysds/dev:${TAG} -f docker/Dockerfile .
+docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
+  --build-arg BRANCH=${BRANCH} -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda .
