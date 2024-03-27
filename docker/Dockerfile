@@ -1,4 +1,4 @@
-ARG TAG=latest
+ARG TAG=HC-522
 FROM hysds/base:${TAG}
 
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
