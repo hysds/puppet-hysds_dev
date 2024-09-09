@@ -1,4 +1,4 @@
-ARG TAG=latest
+ARG TAG=HC-522-update
 FROM hysds/cuda-base:${TAG}
 
 MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
