@@ -11,6 +11,6 @@ BRANCH=$3
 
 # build dev images
 docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
-  --build-arg BRANCH=${BRANCH} -t hysds/dev:${TAG} -f docker/Dockerfile .
+  --build-arg BRANCH=${BRANCH} -t hysds/dev:${TAG} -f docker/Dockerfile --platform linux/amd64,linux/arm64 .
 docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
-  --build-arg BRANCH=${BRANCH} -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda .
+  --build-arg BRANCH=${BRANCH} -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda --platform linux/amd64,linux/arm64 .
