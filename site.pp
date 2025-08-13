@@ -7,9 +7,9 @@ if versioncmp($::puppetversion,'3.6.1') >= 0 {
   }
 }
 
-class yum {
-  exec { "yum-update":
-    command => "/bin/yum -y -q update"
+class microdnf {
+  exec { "microdnf-update":
+    command => "microdnf -y update"
   }
 }
 
@@ -24,7 +24,7 @@ node 'default' {
   # specify stage that each class belongs to;
   # if not specified, they belong to Stage[main]
   class {
-    'yum':         stage => 'pre';
+    'microdnf':         stage => 'pre';
   }
 
   # stage order

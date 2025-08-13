@@ -1,7 +1,8 @@
 Puppet::Type.type(:yumgroup).provide(:default) do
   desc 'Support for managing the yum groups'
 
-  commands :yum => '/usr/bin/yum'
+  #commands :yum => '/usr/bin/yum'
+  commands :yum => '/usr/bin/dnf'
 
   # TODO
   # find out how yum parses groups and reimplement that in ruby
