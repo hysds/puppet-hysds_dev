@@ -9,8 +9,25 @@ TAG=$1
 ORG=$2
 BRANCH=$3
 
-# build dev images
-docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
-  --build-arg BRANCH=${BRANCH} -t hysds/dev:${TAG} -f docker/Dockerfile .
-docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
-  --build-arg BRANCH=${BRANCH} -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda .
+# Check if multi-platform build is requested
+if [ "${USE_BUILDX}" = "1" ]; then
+  echo "Building multi-platform images using Docker Buildx"
+  PLATFORM=${DOCKER_BUILDX_PLATFORM:-"linux/amd64,linux/arm64"}
+  
+  # build dev images with buildx
+  docker buildx build --platform ${PLATFORM} \
+    --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
+    --build-arg BRANCH=${BRANCH} -t hysds/dev:${TAG} -f docker/Dockerfile . --push
+  
+  docker buildx build --platform ${PLATFORM} \
+    --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
+    --build-arg BRANCH=${BRANCH} -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda . --push
+else
+  echo "Building single-platform images using standard Docker build"
+  
+  # build dev images
+  docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
+    --build-arg BRANCH=${BRANCH} -t hysds/dev:${TAG} -f docker/Dockerfile .
+  docker build --rm --force-rm --progress=plain --build-arg TAG=${TAG} --build-arg ORG=${ORG} \
+    --build-arg BRANCH=${BRANCH} -t hysds/cuda-dev:${TAG} -f docker/Dockerfile.cuda .
+fi
